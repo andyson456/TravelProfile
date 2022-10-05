@@ -22,6 +22,7 @@ namespace TravelProfile.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
+            ViewBag.TotalLocations = _context.Location.Count();
             return View(await _context.Location.ToListAsync());
         }
 
