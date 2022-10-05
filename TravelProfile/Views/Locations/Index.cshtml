@@ -10,6 +10,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 <label>Total Locations Visited: </label> @ViewBag.TotalLocations
+<input id="myInput" type="text" placeholder="Search..">
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +32,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
         @foreach (var item in Model)
         {
             <tr>
@@ -59,3 +60,16 @@
         }
     </tbody>
 </table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
